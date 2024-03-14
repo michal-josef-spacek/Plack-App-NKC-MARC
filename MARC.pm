@@ -43,6 +43,7 @@ sub prepare_app {
 		%p,
 		'image_height' => '10em',
 		'image_link' => $self->images->{'logo'},
+		'image_radius' => '15px',
 		'search_placeholder' => decode_utf8('ČČNB, ISBN, ISSN'),
 		'search_url' => '/marc',
 	)->to_app;
