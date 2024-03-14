@@ -1,8 +1,10 @@
 TODO
 ====
-1. Search page with field for cnb number.
 2. Page to output with raw MARC record.
-3.
+3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
+4.
 
 Applied
 =======
+1. Search page with field for cnb number.
+OK [20240314] skim
