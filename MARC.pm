@@ -6,9 +6,11 @@ use warnings;
 
 use Plack::App::CPAN::Changes;
 use Plack::App::NKC::MARC::Output;
+use Plack::App::Search;
 use Plack::App::URLMap;
 use Plack::Session;
 use Plack::Util::Accessor qw(changes css data images lang tags);
+use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.01;
 
@@ -36,6 +38,13 @@ sub prepare_app {
 		'data' => $self->data,
 	);
 
+	my $app_search = Plack::App::Search->new(
+		%p,
+		'image_height' => '10em',
+		'image_link' => $self->images->{'logo'},
+		'search_placeholder' => decode_utf8('ČČNB, ISBN, ISSN'),
+		'search_url' => '/marc',
+	)->to_app;
 	my $app_output = Plack::App::NKC::MARC::Output->new(
 		%common_params,
 	)->to_app;
@@ -48,7 +57,8 @@ sub prepare_app {
 	}
 
 	$self->{'_urlmap'} = Plack::App::URLMap->new;
-	$self->{'_urlmap'}->map('/' => $app_output);
+	$self->{'_urlmap'}->map('/' => $app_search);
+	$self->{'_urlmap'}->map('/marc' => $app_output);
 	if (defined $self->changes) {
 		$self->{'_urlmap'}->map('/changes' => $app_changes);
 	}
