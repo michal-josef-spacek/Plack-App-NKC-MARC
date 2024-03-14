@@ -30,6 +30,7 @@ sub prepare_app {
 
 	my %p = (
 		'css' => $self->css,
+		'lang' => 'ces',
 		'tags' => $self->tags,
 	);
 
