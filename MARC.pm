@@ -6,7 +6,7 @@ use warnings;
 
 use Plack::App::CPAN::Changes;
 use Plack::App::NKC::MARC::Output;
-use Plack::App::Search;
+use Plack::App::Search 0.04;
 use Plack::App::URLMap;
 use Plack::Session;
 use Plack::Util::Accessor qw(changes css data images lang tags);
