@@ -44,10 +44,14 @@ sub detect_search {
 	# Detect ISSN.
 	if (! defined $search_ccnb && ! defined $search_isbn) {
 		my $issn = Business::ISSN->new($search_string);
-		if (defined $issn && $issn->is_valid) {
-			$search_issn = $search_string;
+		if (defined $issn) {
+			if (! $issn->is_valid) {
+				$issn->fix_checksum;
+			}
+			if ($issn->is_valid) {
+				$search_issn = $issn->as_string;
+			}
 		}
-		# TODO Fix checksum.
 	}
 
 	# Detect CNB.

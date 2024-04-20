@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Plack::App::NKC::MARC::Utils qw(detect_search);
-use Test::More 'tests' => 19;
+use Test::More 'tests' => 25;
 use Test::NoWarnings;
 
 # Test.
@@ -34,6 +34,18 @@ is($ret_issn, undef, 'Get ISSN search string (8086347256, bad checksum).');
 is($ret_ccnb, undef, 'Get CCNB search string (0374-6852).');
 is($ret_isbn, undef, 'Get ISBN search string (0374-6852).');
 is($ret_issn, '0374-6852', 'Get ISSN search string (0374-6852).');
+
+# Test.
+($ret_ccnb, $ret_isbn, $ret_issn) = detect_search('0374-6851');
+is($ret_ccnb, undef, 'Get CCNB search string (0374-6851).');
+is($ret_isbn, undef, 'Get ISBN search string (0374-6851).');
+is($ret_issn, '0374-6852', 'Get ISSN search string (0374-6851).');
+
+# Test.
+($ret_ccnb, $ret_isbn, $ret_issn) = detect_search('03746851');
+is($ret_ccnb, undef, 'Get CCNB search string (03746851).');
+is($ret_isbn, undef, 'Get ISBN search string (03746851).');
+is($ret_issn, '0374-6852', 'Get ISSN search string (03746851).');
 
 # Test.
 ($ret_ccnb, $ret_isbn, $ret_issn) = detect_search('foo');
