@@ -9,7 +9,7 @@ use Plack::App::NKC::MARC::Output;
 use Plack::App::Search 0.04;
 use Plack::App::URLMap;
 use Plack::Session;
-use Plack::Util::Accessor qw(changes css data images lang tags);
+use Plack::Util::Accessor qw(changes css data images lang tags zoom);
 use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.01;
@@ -49,6 +49,7 @@ sub prepare_app {
 	)->to_app;
 	my $app_output = Plack::App::NKC::MARC::Output->new(
 		%common_params,
+		'zoom' => $self->zoom,
 	)->to_app;
 	my $app_changes;
 	if (defined $self->changes) {
