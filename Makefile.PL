@@ -18,6 +18,8 @@ name 'Plack-App-NKC-MARC';
 perl_version 5.008;
 readme_from 'MARC.pm';
 recursive_author_tests('xt');
+requires 'Business::ISBN' => 0;
+requires 'Business::ISSN' => 0;
 requires 'Plack::App::CPAN::Changes' => 0;
 requires 'Plack::App::Search' => 0.04;
 requires 'Plack::App::URLMap' => 0;

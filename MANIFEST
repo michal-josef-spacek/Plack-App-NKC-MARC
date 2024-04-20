@@ -16,12 +16,18 @@ Makefile.PL
 MANIFEST			This list of files
 MARC.pm
 MARC/Output.pm
+MARC/Utils.pm
 META.yml
 README
+t/Plack-App-NKC-MARC-Utils/01-use.t
+t/Plack-App-NKC-MARC-Utils/02-version.t
+t/Plack-App-NKC-MARC-Utils/03-detect_search.t
 t/Plack-App-NKC-MARC/01-use.t
 t/Plack-App-NKC-MARC/02-version.t
 t/Plack-App-NKP-MARC-Output/01-use.t
 t/Plack-App-NKP-MARC-Output/02-version.t
+xt/Plack-App-NKC-MARC-Utils/01-pod_coverage.t
+xt/Plack-App-NKC-MARC-Utils/02-pod.t
 xt/Plack-App-NKC-MARC/01-pod_coverage.t
 xt/Plack-App-NKC-MARC/02-pod.t
 xt/Plack-App-NKP-MARC-Output/01-pod_coverage.t

@@ -22,6 +22,8 @@ no_index:
     - t
     - xt
 requires:
+  Business::ISBN: 0
+  Business::ISSN: 0
   Plack::App::CPAN::Changes: 0
   Plack::App::Search: 0.04
   Plack::App::URLMap: 0
