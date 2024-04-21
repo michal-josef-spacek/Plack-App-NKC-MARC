@@ -54,9 +54,6 @@ sub detect_search {
 		}
 	}
 
-	# Detect CNB.
-	# TODO
-
 	return ($search_ccnb, $search_isbn, $search_issn);
 }
 
