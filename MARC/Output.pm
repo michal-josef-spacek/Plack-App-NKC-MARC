@@ -9,7 +9,7 @@ use Error::Pure qw(err);
 use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
-use Plack::App::NKC::MARC::Utils qw(detect_search);
+use Plack::App::NKC::MARC::Utils qw(add_message detect_search);
 use Plack::Request;
 use Plack::Session;
 use Plack::Util::Accessor qw(lang zoom);
@@ -82,7 +82,7 @@ sub _lang {
 }
 
 sub _load_data {
-	my $self = shift;
+	my ($self, $env) = @_;
 
 	my $rs;
 	if (defined $self->{'_search_ccnb'}) {
@@ -92,7 +92,13 @@ sub _load_data {
 	} elsif (defined $self->{'_search_issn'}) {
 		$rs = $self->{'_zoom'}->search_pqf('@attr 1=8 '.$self->{'_search_issn'});
 	} else {
-		# TODO error.
+		add_message(
+			$self,
+			$env,
+			'error',
+			decode_utf8('Nemůžu najít požadováné dílo.'),
+		);
+		return;
 	}
 
 	# Cache.
@@ -166,7 +172,7 @@ sub _process_actions {
 	$self->{'_title'} = $self->_lang('page_title');
 
 	$self->_process_form($env);
-	$self->_load_data;
+	$self->_load_data($env);
 
 	my $menu = Data::NKC::MARC::Menu->new(
 		'cnb_id' => $self->{'_search_ccnb'},
@@ -213,8 +219,14 @@ sub _process_form {
 	$self->{'_output_mode'} = $req->parameters->{'output_mode'};
 	if (! defined $self->{'_output_mode'}) {
 		$self->{'_output_mode'} = 'xml_raw';
+	if (none { $self->{'_output_mode'} eq $_ } @OUTPUT_MODES) {
+		add_message(
+			$self,
+			$env,
+			'error',
+			decode_utf8('Špatný vykreslovací mód.'),
+		);
 	}
-	# TODO Check modes.
 
 	return;
 }
