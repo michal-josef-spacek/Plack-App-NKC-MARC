@@ -262,7 +262,6 @@ sub _view_data {
 	} elsif ($self->{'_output_mode'} eq 'xml_raw_color') {
 		$self->{'_tags_xml_raw_color'}->process;
 	}
-	# TODO
 
 	return;
 }
