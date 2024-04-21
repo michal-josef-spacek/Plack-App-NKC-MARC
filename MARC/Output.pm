@@ -6,7 +6,7 @@ use warnings;
 
 use Data::NKC::MARC::Menu;
 use Error::Pure qw(err);
-use List::Util qw(none);
+use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
 use Plack::App::NKC::MARC::Utils qw(detect_search);
