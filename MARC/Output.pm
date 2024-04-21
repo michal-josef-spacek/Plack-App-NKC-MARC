@@ -84,6 +84,14 @@ sub _lang {
 sub _load_data {
 	my ($self, $env) = @_;
 
+	# Zoom connections.
+	$self->{'_zoom'} = ZOOM::Connection->new(
+		$self->{'_zoom_data'}->host,
+		$self->{'_zoom_data'}->port,
+		'databaseName' => $self->{'_zoom_data'}->db,
+	);
+	$self->{'_zoom'}->option('preferredRecordSyntax' => 'usmarc');
+
 	my $rs;
 	if (defined $self->{'_search_ccnb'}) {
 		$rs = $self->{'_zoom'}->search_pqf('@attr 1=48 '.$self->{'_search_ccnb'});
@@ -155,20 +163,13 @@ sub _prepare_app {
 	$self->{'_tags_xml_raw'} = Tags::HTML::XML::Raw->new(%p);
 	$self->{'_tags_xml_raw_color'} = Tags::HTML::XML::Raw::Color->new(%p);
 
-	my $zoom = $self->zoom;
-	if (! defined $zoom
-		|| ! blessed($zoom)
-		|| ! $zoom->isa('Data::NKC::MARC::Zoom')) {
+	$self->{'_zoom_data'} = $self->zoom;
+	if (! defined $self->{'_zoom_data'}
+		|| ! blessed($self->{'_zoom_data'})
+		|| ! $self->{'_zoom_data'}->isa('Data::NKC::MARC::Zoom')) {
 
 		err "ZOOM data object must be a 'Data::NKC::MARC::Zoom' instance.";
 	}
-	# Zoom connections.
-	$self->{'_zoom'} = ZOOM::Connection->new(
-		$zoom->host,
-		$zoom->port,
-		'databaseName' => $zoom->db,
-	);
-	$self->{'_zoom'}->option('preferredRecordSyntax' => 'usmarc');
 
 	return;
 }
