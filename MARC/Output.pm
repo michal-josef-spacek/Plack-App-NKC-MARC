@@ -87,10 +87,13 @@ sub _load_data {
 	my $rs;
 	if (defined $self->{'_search_ccnb'}) {
 		$rs = $self->{'_zoom'}->search_pqf('@attr 1=48 '.$self->{'_search_ccnb'});
+		$self->{'_searching'} = decode_utf8('ČČNB: '.$self->{'_search_ccnb'});
 	} elsif (defined $self->{'_search_isbn'}) {
 		$rs = $self->{'_zoom'}->search_pqf('@attr 1=7 '.$self->{'_search_isbn'});
+		$self->{'_searching'} = decode_utf8('ISBN '.$self->{'_search_isbn'});
 	} elsif (defined $self->{'_search_issn'}) {
 		$rs = $self->{'_zoom'}->search_pqf('@attr 1=8 '.$self->{'_search_issn'});
+		$self->{'_searching'} = decode_utf8('ISSN '.$self->{'_search_issn'});
 	} else {
 		add_message(
 			$self,
@@ -179,6 +182,7 @@ sub _process_actions {
 		'logo_image_location' => '/img/logo.png',
 		'logo_location' => '/',
 		'search' => $self->{'_search'},
+		'searching' => $self->{'_searching'},
 	);
 	$self->{'_tags_menu'}->init($menu);
 
@@ -209,6 +213,7 @@ sub _process_form {
 	($self->{'_search_ccnb'}, $self->{'_search_issn'}, $self->{'_search_issn'})
 		= (undef, undef, undef);
 	$self->{'_marc'} = undef;
+	$self->{'_searching'} = undef;
 
 	# Check form processing.
 	if (! $req->parameters->{'search'}) {
