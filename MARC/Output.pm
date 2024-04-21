@@ -24,6 +24,7 @@ use Unicode::UTF8 qw(decode_utf8);
 use ZOOM;
 
 Readonly::Array our @OUTPUT_MODES => qw(xml_raw xml_raw_color);
+Readonly::Scalar our $FOOTER_HEIGHT => qw(40px);
 
 our $VERSION = 0.01;
 
@@ -51,6 +52,23 @@ sub _css {
 	$self->{'_tags_menu'}->process_css;
 	$self->{'_tags_xml_raw'}->process_css;
 	$self->{'_tags_xml_raw_color'}->process_css;
+
+	$self->{'css'}->put(
+		['s', 'footer'],
+		['d', 'text-align', 'center'],
+		['d', 'padding', '10px 0'],
+		['d', 'background-color', '#f3f3f3'],
+		['d', 'color', '#333'],
+		['d', 'position', 'fixed'],
+		['d', 'bottom', 0],
+		['d', 'width', '100%'],
+		['d', 'height', $FOOTER_HEIGHT],
+		['e'],
+
+		['s', '.container'],
+		['d', 'padding-bottom', $FOOTER_HEIGHT],
+		['e'],
+	);
 
 	return;
 }
@@ -280,6 +298,22 @@ sub _tags_middle {
 
 			$self->_view_data;
 		},
+	);
+
+	$self->{'tags'}->put(
+		['b', 'footer'],
+		['b', 'a'],
+		['a', 'href', '/changes'],
+		['d', 'Verze: '.$VERSION],
+		['e', 'a'],
+		['d', ',&nbsp;'],
+		# XXX Automatic year.
+		['d', decode_utf8('© 2024 ')],
+		['b', 'a'],
+		['a', 'href', 'https://skim.cz'],
+		['d', decode_utf8('Michal Josef Špaček')],
+		['e', 'a'],
+		['e', 'footer'],
 	);
 
 	return;
