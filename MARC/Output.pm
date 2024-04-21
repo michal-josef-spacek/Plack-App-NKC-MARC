@@ -116,6 +116,7 @@ sub _prepare_app {
 	);
 	$self->{'_tags_container'} = Tags::HTML::Container->new(%p,
 		'height' => '1%',
+		'padding' => '0.5em',
 		'vert_align' => 'top',
 	);
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,

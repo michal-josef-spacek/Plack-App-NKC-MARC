@@ -26,6 +26,7 @@ requires 'Plack::App::URLMap' => 0;
 requires 'Plack::Component' => 0;
 requires 'Plack::Session' => 0;
 requires 'Plack::Util::Accessor' => 0;
+requires 'Tags::HTML::Container' => 0.07;
 requires 'Unicode::UTF8' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Plack-App-NKC-MARC/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Plack-App-NKC-MARC';

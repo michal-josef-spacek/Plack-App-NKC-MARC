@@ -30,6 +30,7 @@ requires:
   Plack::Component: 0
   Plack::Session: 0
   Plack::Util::Accessor: 0
+  Tags::HTML::Container: 0.07
   Unicode::UTF8: 0
   perl: 5.8.0
 resources:
