@@ -6,11 +6,31 @@ use warnings;
 
 use Business::ISBN;
 use Business::ISSN;
+use Data::Message::Simple;
+use Plack::Session;
 use Readonly;
 
-Readonly::Array our @EXPORT_OK => qw(detect_search);
+Readonly::Array our @EXPORT_OK => qw(add_message detect_search);
 
 our $VERSION = 0.01;
+
+sub add_message {
+	my ($self, $env, $message_type, $message) = @_;
+
+	my $session = Plack::Session->new($env);
+	my $m = Data::Message::Simple->new(
+		'text' => $message,
+		'type' => $message_type,
+	);
+	my $messages_ar = $session->get('messages');
+	if (defined $messages_ar) {
+		push @{$messages_ar}, $m;
+	} else {
+		$session->set('messages', [$m]);
+	}
+
+	return;
+}
 
 sub detect_search {
 	my $search_string = shift;

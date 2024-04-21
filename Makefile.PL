@@ -20,6 +20,7 @@ readme_from 'MARC.pm';
 recursive_author_tests('xt');
 requires 'Business::ISBN' => 0;
 requires 'Business::ISSN' => 0;
+requires 'Data::Message::Simple' => 0;
 requires 'Data::NKC::MARC::Menu' => 0;
 requires 'Error::Pure' => 0;
 requires 'List::Util' => 1.33;
