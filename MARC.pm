@@ -10,7 +10,7 @@ use Plack::App::NKC::MARC::Output;
 use Plack::App::Search 0.04;
 use Plack::App::URLMap;
 use Plack::Session;
-use Plack::Util::Accessor qw(changes css data images lang tags zoom);
+use Plack::Util::Accessor qw(changes css images lang tags zoom);
 use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.01;
@@ -27,8 +27,6 @@ sub call {
 sub prepare_app {
 	my $self = shift;
 
-	$self->{'_data'} = $self->data;
-
 	my %p = (
 		'css' => $self->css,
 		'lang' => 'ces',
@@ -37,7 +35,6 @@ sub prepare_app {
 
 	my %common_params = (
 		%p,
-		'data' => $self->data,
 	);
 
 	my $app_list = Plack::App::NKC::MARC::List->new(%p)->to_app;
