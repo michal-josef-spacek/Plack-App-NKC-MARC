@@ -218,7 +218,8 @@ sub _process_form {
 	# View mode.
 	$self->{'_output_mode'} = $req->parameters->{'output_mode'};
 	if (! defined $self->{'_output_mode'}) {
-		$self->{'_output_mode'} = 'xml_raw';
+		$self->{'_output_mode'} = 'xml_raw_color';
+	}
 	if (none { $self->{'_output_mode'} eq $_ } @OUTPUT_MODES) {
 		add_message(
 			$self,
