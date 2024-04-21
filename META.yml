@@ -1,5 +1,5 @@
 ---
-abstract: 'Plack application for NKC MARC.'
+abstract: 'Plack application for NKC MARC demo.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
