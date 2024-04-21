@@ -24,6 +24,7 @@ no_index:
 requires:
   Business::ISBN: 0
   Business::ISSN: 0
+  Data::NKC::MARC::Menu: 0
   Plack::App::CPAN::Changes: 0
   Plack::App::Search: 0.04
   Plack::App::URLMap: 0
@@ -31,6 +32,7 @@ requires:
   Plack::Session: 0
   Plack::Util::Accessor: 0
   Tags::HTML::Container: 0.07
+  Tags::HTML::NKC::MARC::Menu: 0
   Unicode::UTF8: 0
   perl: 5.8.0
 resources:

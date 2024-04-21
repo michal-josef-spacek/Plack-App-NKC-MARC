@@ -4,6 +4,7 @@ use base qw(Plack::Component::Tags::HTML);
 use strict;
 use warnings;
 
+use Data::NKC::MARC::Menu;
 use Error::Pure qw(err);
 use List::Util qw(none);
 use MARC::File::XML;
@@ -17,6 +18,7 @@ use Readonly;
 use Scalar::Util qw(blessed);
 use Tags::HTML::Container;
 use Tags::HTML::Messages;
+use Tags::HTML::NKC::MARC::Menu;
 use Tags::HTML::XML::Raw;
 use Tags::HTML::XML::Raw::Color;
 use Unicode::UTF8 qw(decode_utf8);
@@ -32,6 +34,7 @@ sub _cleanup {
 	$self->{'_data_tags_after_title'} = [];
 	$self->{'_tags_container'}->cleanup;
 	$self->{'_tags_messages'}->cleanup;
+	$self->{'_tags_menu'}->cleanup;
 	$self->{'_tags_xml_raw'}->cleanup;
 	$self->{'_tags_xml_raw_color'}->cleanup;
 
@@ -46,6 +49,7 @@ sub _css {
 		'error' => 'red',
 		'info' => 'green',
 	});
+	$self->{'_tags_menu'}->process_css;
 	$self->{'_tags_xml_raw'}->process_css;
 	$self->{'_tags_xml_raw_color'}->process_css;
 
@@ -101,6 +105,15 @@ sub _load_data {
 		$self->{'_marc'} = MARC::Record->new_from_usmarc($raw_record);
 	}
 
+	# Update ccnb id if doesn't defined in search.
+	if (! defined $self->{'_search_ccnb'}) {
+		my $ccnb = $self->_subfield('015', 'a');
+		if (! $ccnb) {
+			$ccnb = $self->_subfield('015', 'z');
+		}
+		$self->{'_search_ccnb'} = $ccnb;
+	}
+
 	return;
 }
 
@@ -122,6 +135,7 @@ sub _prepare_app {
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
 		'flag_no_messages' => 0,
 	);
+	$self->{'_tags_menu'} = Tags::HTML::NKC::MARC::Menu->new(%p);
 	$self->{'_tags_xml_raw'} = Tags::HTML::XML::Raw->new(%p);
 	$self->{'_tags_xml_raw_color'} = Tags::HTML::XML::Raw::Color->new(%p);
 
@@ -154,6 +168,14 @@ sub _process_actions {
 
 	$self->_process_form($env);
 	$self->_load_data;
+
+	my $menu = Data::NKC::MARC::Menu->new(
+		'cnb_id' => $self->{'_search_ccnb'},
+		'logo_image_location' => '/img/logo.png',
+		'logo_location' => '/',
+		'search' => $self->{'_search'},
+	);
+	$self->{'_tags_menu'}->init($menu);
 
 	# Clean CSS and Javascript in header. Because switching of systems.
 	$self->css_src([]);
@@ -198,6 +220,17 @@ sub _process_form {
 	return;
 }
 
+sub _subfield {
+	my ($self, $field, $subfield) = @_;
+
+	my $field_value = $self->{'_marc'}->field($field);
+	if (! defined $field_value) {
+		return;
+	}
+
+	return $field_value->subfield($subfield);
+}
+
 sub _tags_middle {
 	my ($self, $env) = @_;
 
@@ -208,17 +241,13 @@ sub _tags_middle {
 		$messages_ar = $session->get('messages');
 		$session->set('messages', []);
 	}
+	$self->{'_tags_menu'}->process;
 	$self->{'_tags_container'}->process(
 		sub {
 			$self->{'_tags_messages'}->process($messages_ar);
 
 			# Input: __ID__ (ČČNB) Transformation: __Transformation__ (link) Output: __Output__
 
-			$self->{'tags'}->put(
-				defined $self->{'_search_ccnb'} ? (
-					['d', decode_utf8('ČČNB:').$self->{'_search_ccnb'}],
-				) : (),
-			);
 			$self->_view_data;
 		},
 	);
