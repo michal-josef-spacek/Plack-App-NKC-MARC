@@ -108,18 +108,26 @@ sub _load_data {
 	# TODO
 
 	# Load data.
-	if (defined $rs) {
+	if (defined $rs && $rs->size > 0) {
 		my $raw_record = $rs->record(0)->raw;
 		$self->{'_marc'} = MARC::Record->new_from_usmarc($raw_record);
-	}
 
-	# Update ccnb id if doesn't defined in search.
-	if (! defined $self->{'_search_ccnb'}) {
-		my $ccnb = $self->_subfield('015', 'a');
-		if (! $ccnb) {
-			$ccnb = $self->_subfield('015', 'z');
+		# Update ccnb id if doesn't defined in search.
+		if (! defined $self->{'_search_ccnb'}) {
+			my $ccnb = $self->_subfield('015', 'a');
+			if (! $ccnb) {
+				$ccnb = $self->_subfield('015', 'z');
+			}
+			$self->{'_search_ccnb'} = $ccnb;
 		}
-		$self->{'_search_ccnb'} = $ccnb;
+	} else {
+		add_message(
+			$self,
+			$env,
+			'error',
+			decode_utf8('Nemůžu najít požadováné dílo.'),
+		);
+		return;
 	}
 
 	return;
