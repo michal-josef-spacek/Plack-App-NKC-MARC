@@ -19,14 +19,18 @@ name: Plack-App-NKC-MARC
 no_index:
   directory:
     - inc
+    - share
     - t
     - xt
 requires:
   Business::ISBN: 0
   Business::ISSN: 0
+  Data::HTML::Element::A: 0
   Data::Message::Simple: 0
   Data::NKC::MARC::Menu: 0
   Error::Pure: 0
+  File::Share: 0
+  IO::File: 0
   List::Util: 1.33
   MARC::File::XML: 0
   MARC::Record: 0
@@ -42,8 +46,10 @@ requires:
   Tags::HTML::Container: 0.07
   Tags::HTML::Messages: 0
   Tags::HTML::NKC::MARC::Menu: 0
+  Tags::HTML::Table::View: 0.06
   Tags::HTML::XML::Raw: 0
   Tags::HTML::XML::Raw::Color: 0
+  Text::CSV_XS: 0
   Unicode::UTF8: 0
   ZOOM: 0
   perl: 5.8.0

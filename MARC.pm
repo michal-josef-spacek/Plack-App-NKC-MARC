@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 use Plack::App::CPAN::Changes;
+use Plack::App::NKC::MARC::List;
 use Plack::App::NKC::MARC::Output;
 use Plack::App::Search 0.04;
 use Plack::App::URLMap;
@@ -39,6 +40,7 @@ sub prepare_app {
 		'data' => $self->data,
 	);
 
+	my $app_list = Plack::App::NKC::MARC::List->new(%p)->to_app;
 	my $app_search = Plack::App::Search->new(
 		%p,
 		'image_height' => '10em',
@@ -61,6 +63,7 @@ sub prepare_app {
 
 	$self->{'_urlmap'} = Plack::App::URLMap->new;
 	$self->{'_urlmap'}->map('/' => $app_search);
+	$self->{'_urlmap'}->map('/list' => $app_list);
 	$self->{'_urlmap'}->map('/marc' => $app_output);
 	if (defined $self->changes) {
 		$self->{'_urlmap'}->map('/changes' => $app_changes);
