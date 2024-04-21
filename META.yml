@@ -35,7 +35,7 @@ requires:
   MARC::File::XML: 0
   MARC::Record: 0
   Plack::App::CPAN::Changes: 0
-  Plack::App::Search: 0.04
+  Plack::App::Search: 0.05
   Plack::App::URLMap: 0
   Plack::Component: 0
   Plack::Request: 0

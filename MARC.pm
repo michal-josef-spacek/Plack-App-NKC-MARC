@@ -48,6 +48,13 @@ sub prepare_app {
 		'image_radius' => '15px',
 		'search_placeholder' => decode_utf8('ČČNB, ISBN, ISSN'),
 		'search_url' => '/marc',
+		'tags_after' => [
+			['b', 'a'],
+			['a', 'href', '/list'],
+			['a', 'style', 'font-size:1em;text-decoration:none;'],
+			['d', decode_utf8('Seznam zajímavých položek')],
+			['e', 'a'],
+		],
 	)->to_app;
 	my $app_output = Plack::App::NKC::MARC::Output->new(
 		%common_params,
