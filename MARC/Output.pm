@@ -12,7 +12,7 @@ use MARC::Record;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search);
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(lang zoom);
+use Plack::Util::Accessor qw(lang version zoom);
 use Readonly;
 use Scalar::Util qw(blessed);
 use Tags::HTML::Container;
@@ -305,7 +305,7 @@ sub _tags_middle {
 		['b', 'footer'],
 		['b', 'a'],
 		['a', 'href', '/changes'],
-		['d', 'Verze: '.$VERSION],
+		['d', 'Verze: '.(defined $self->version ? $self->version : $VERSION)],
 		['e', 'a'],
 		['d', ',&nbsp;'],
 		# XXX Automatic year.

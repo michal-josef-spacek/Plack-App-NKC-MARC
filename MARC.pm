@@ -33,11 +33,21 @@ sub prepare_app {
 		'tags' => $self->tags,
 	);
 
+	my $version;
+	if (defined $self->changes) {
+		$version = ($self->changes->releases)[-1]->version;
+	}
+
 	my %common_params = (
 		%p,
+		defined $version ? (
+			'version' => $version,
+		) : (),
 	);
 
-	my $app_list = Plack::App::NKC::MARC::List->new(%p)->to_app;
+	my $app_list = Plack::App::NKC::MARC::List->new(
+		%common_params,
+	)->to_app;
 	my $app_search = Plack::App::Search->new(
 		%p,
 		'image_height' => '10em',

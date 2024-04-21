@@ -9,7 +9,7 @@ use File::Share ':all';
 use IO::File;
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(lang);
+use Plack::Util::Accessor qw(lang version);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Messages;
@@ -185,7 +185,7 @@ sub _tags_middle {
 		['b', 'footer'],
 		['b', 'a'],
 		['a', 'href', '/changes'],
-		['d', 'Verze: '.$VERSION],
+		['d', 'Verze: '.(defined $self->version ? $self->version : $VERSION)],
 		['e', 'a'],
 		['d', ',&nbsp;'],
 		# XXX Automatic year.
