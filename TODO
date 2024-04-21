@@ -2,7 +2,8 @@ TODO
 ====
 2. Page to output with raw MARC record.
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
-4.
+4. Add list of interesting ccnb ids.
+5.
 
 Applied
 =======
