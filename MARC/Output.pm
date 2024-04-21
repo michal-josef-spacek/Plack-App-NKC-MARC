@@ -31,7 +31,6 @@ our $VERSION = 0.01;
 sub _cleanup {
 	my ($self, $env) = @_;
 
-	$self->{'_data_tags_after_title'} = [];
 	$self->{'_tags_container'}->cleanup;
 	$self->{'_tags_messages'}->cleanup;
 	$self->{'_tags_menu'}->cleanup;
