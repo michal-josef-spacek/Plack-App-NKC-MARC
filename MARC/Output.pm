@@ -176,7 +176,9 @@ sub _prepare_app {
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
 		'flag_no_messages' => 0,
 	);
-	$self->{'_tags_menu'} = Tags::HTML::NKC::MARC::Menu->new(%p);
+	$self->{'_tags_menu'} = Tags::HTML::NKC::MARC::Menu->new(%p,
+		'mode_search' => 1,
+	);
 	$self->{'_tags_xml_raw'} = Tags::HTML::XML::Raw->new(%p);
 	$self->{'_tags_xml_raw_color'} = Tags::HTML::XML::Raw::Color->new(%p);
 
