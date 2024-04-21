@@ -127,9 +127,9 @@ sub _prepare_app {
 	my $zoom = $self->zoom;
 	if (! defined $zoom
 		|| ! blessed($zoom)
-		|| ! $zoom->isa('Data::NKC::Zoom')) {
+		|| ! $zoom->isa('Data::NKC::MARC::Zoom')) {
 
-		err "ZOOM data object must be a 'Data::NKC::Zoom' instance.";
+		err "ZOOM data object must be a 'Data::NKC::MARC::Zoom' instance.";
 	}
 	# Zoom connections.
 	$self->{'_zoom'} = ZOOM::Connection->new(
