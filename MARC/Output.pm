@@ -206,6 +206,10 @@ sub _process_form {
 
 	my $req = Plack::Request->new($env);
 
+	($self->{'_search_ccnb'}, $self->{'_search_issn'}, $self->{'_search_issn'})
+		= (undef, undef, undef);
+	$self->{'_marc'} = undef;
+
 	# Check form processing.
 	if (! $req->parameters->{'search'}) {
 		return;
