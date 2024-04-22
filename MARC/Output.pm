@@ -349,7 +349,6 @@ sub _tags_middle {
 		['b', 'b'],
 		['d', decode_utf8('Výstup:')],
 		['e', 'b'],
-		['e', 'b'],
 		['d', ' MARC '],
 	);
 	$self->{'_tags_select_output'}->process;
