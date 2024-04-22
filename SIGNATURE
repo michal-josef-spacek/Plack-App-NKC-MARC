@@ -1,0 +1,71 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.87.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+SHA256 04ca12d2c81077901157b8f1a98bf134b86b8352bd239b9750efbcd624dfa99d CONCEPT
+SHA256 52a1c4cc95865f558af9667e37f043787cbf3ca3e48f3b44557bed7ab3802de1 Changes
+SHA256 e9721661dbfb60dadebf3cd197cbc00239895aa73fb3431e19490cfad301cf99 LICENSE
+SHA256 eece27ccf1d60c3972e5aa06b1cfcc6bfd53de109a68d392a9e21017bcf43727 MANIFEST
+SHA256 d843adf0b3000c4b8943a6af417434ff1d2208b7c89797d57d1bcddc31a661e3 MARC.pm
+SHA256 1e60f84432b0a1e12debff5f33c6f5c6071157844c0866766f66dd4080ce6a5c MARC/List.pm
+SHA256 4affacd9b0ad0e5503b13cb96b1f7a7b264821ee7588d35af8f8239fdd03a93e MARC/Output.pm
+SHA256 958fabee25ee4a121b470e4d27317e6737bb81f22285bd04f6d54b8a95a79d95 MARC/Utils.pm
+SHA256 7c33d7c0d9d28afd3b37d76b9576f824709a1a917e240ec4321981f1058b2a14 META.yml
+SHA256 f8ccb90c40b40d011db6690600f5bac404c550855fe12792a85e1c59bc3ffd88 Makefile.PL
+SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 README
+SHA256 cd5397bbe618f5bbd4e12a33b0cf5d21114e771c2dbd0ce28e2135beb52c35a8 inc/Module/Install.pm
+SHA256 8bd506c33fb78f10f6451413e931ca23541fcc4eebe05fcb7c7c9577341223c4 inc/Module/Install/AuthorRequires.pm
+SHA256 1b5430a46a35142ef8914d8c745196fca825defc9dfa7e389299bf294613825e inc/Module/Install/AuthorTests.pm
+SHA256 798836f9ccb8d204b1be31fc3835631f57e9d818b21a8f0d14bfcfb82ff4a72a inc/Module/Install/Base.pm
+SHA256 d64cd4c16f83c5baf11f64a44bea3a0abc060a49da5aba040f0eb01394bf75ab inc/Module/Install/Can.pm
+SHA256 65d7a6098bf3f829e8c1c2865476d3537aa6f0ad0ffc9149e10812c856529043 inc/Module/Install/Fetch.pm
+SHA256 70c4b77acab3ff51dfb318110369607cb109e1c319459249623b787cf3859750 inc/Module/Install/Makefile.pm
+SHA256 14556386168007ce913e669fc08a332ccdb6140246fd55a90c879b5190c1b57a inc/Module/Install/Metadata.pm
+SHA256 53825bc78e4c910b888160bc148c8bc211be58e02b99c8edcbf4854f95faa049 inc/Module/Install/ReadmeFromPod.pm
+SHA256 b986592700675e11c2c62cb41fa24d9f4d15e077a0d317f372efcaa78d68a1d9 inc/Module/Install/Share.pm
+SHA256 4c746c02c5cc19bed4c352e76205b4adff4c45ce8310d71294e1b83c059659c2 inc/Module/Install/Win32.pm
+SHA256 d3d9b4583243c470ae895defa4c44564485b53693cba1c50ab0320768f443e97 inc/Module/Install/WriteAll.pm
+SHA256 546d0273b84f2c114004cc88eab4ba358361eb2ce55db932d51e79ef5d6be51d share/data_cnb.csv
+SHA256 b8ddd8ab618be1f2f6009ea9e8381208a2ce6d4f32e8c521ded4e25427ad0bdf t/Plack-App-NKC-MARC-List/01-use.t
+SHA256 accbee16e8ed4dfa494b3a84dc64db9bdf78a8a97497f73a8af386a9814c6bb8 t/Plack-App-NKC-MARC-List/02-version.t
+SHA256 e569d297317d338dbc65a020ab0597efeb4bff7212e6fdbcdc1806c9fae1b8b2 t/Plack-App-NKC-MARC-Output/01-use.t
+SHA256 0063de319f10c0d9d988d9ae013e7016c75c17e0188de19c48a6ab9a3a84ad7e t/Plack-App-NKC-MARC-Output/02-version.t
+SHA256 2c39ff61c2a8d165102b015f6cd98f2b0756f2b1d86c133a9d38d189f0d1a6d1 t/Plack-App-NKC-MARC-Utils/01-use.t
+SHA256 c2faf1e6aa56f9cdff0b6377ab1bf56da5d220ee19799674712732e645099ba3 t/Plack-App-NKC-MARC-Utils/02-version.t
+SHA256 25ce06fd5eacc096369a86a69cf603e5376019e3525c87d8d4514ae2c243a8c5 t/Plack-App-NKC-MARC-Utils/03-detect_search.t
+SHA256 16161ed097009ce3f529ad070108b60f78b557058d4cf48fcfa21065ec560c3f t/Plack-App-NKC-MARC/01-use.t
+SHA256 18959ea3063ee49a063d335e352d392065d198d2d5e8408157d0e179bacca45a t/Plack-App-NKC-MARC/02-version.t
+SHA256 31144d13adc28d4397fd1994d50bba81aa00e5e559b52ebab1466ec2fa6b28e9 xt/Plack-App-NKC-MARC-List/01-pod_coverage.t
+SHA256 6cf8970b5b233962a3e1f7e1b832033dcaf3d79a1bf512f59130a14680736f7f xt/Plack-App-NKC-MARC-List/02-pod.t
+SHA256 e51302b68343bde2e00df4b2e009e937560a572061eb188f46057984045a58ed xt/Plack-App-NKC-MARC-Output/01-pod_coverage.t
+SHA256 55486111e8b4360a9b3681d5967d73d06b35b772322846b5ee47c1b756b25bab xt/Plack-App-NKC-MARC-Output/02-pod.t
+SHA256 7c75c668c51487c9a6359ee2c450e852eeeebf3377f8a8ff4e52c8e25a5962a5 xt/Plack-App-NKC-MARC-Utils/01-pod_coverage.t
+SHA256 21f6d87f478db041916bc75b354e9dd5f131b55d0cf691481b84d14b0f025a13 xt/Plack-App-NKC-MARC-Utils/02-pod.t
+SHA256 05f24a64b8d1bfffa615cfe193f2a67785c41e4a45d693a4e4e4878ad9ba3735 xt/Plack-App-NKC-MARC/01-pod_coverage.t
+SHA256 da8de91149402f1f46760c53affe711cd523b93716face376e01ed657cc86b91 xt/Plack-App-NKC-MARC/02-pod.t
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBAwAdFiEEbhzVZugfHqSVNvE7YSp92FNcjtAFAmYl/MQACgkQYSp92FNc
+jtDFsQv8DfQ8XGgGAfSERAd9ENahU9JZd33EB2NbUdUF7kOXRHfT5HGfLj5qNcMr
+hVeZyWUF8thvhyM5n7TKc+t3bxFTMfxFwKFtngVYZ7pVmev5UXgoEslXrGrIoOGn
+y6Tu+O5gSwtpT2dE74VFCrB5hlrUWOkgVz4T4Tu/PxOCNiDoredAwdF6dGIEmBCO
+UpJ9SreZbwJtoeL71+S8Sj9gDqsS6Mjud8EgEPGbWZ5HMwS17KpGHe9RlrPxhpYt
+wlV2ez/y3bRYsaasB0rziRMmrTb+97pb4mm9vB03aTQht5TnD0DHmAJY6+aMtxfd
+gY2xU0Ot5NgzE2WiUAj5307Zd+vMRkqa6TDmpXmBb/Z93F2bMRXFnF4YHZ3XBOUl
+b53N8ym6RxeaC1ozJKYW7UIaUcQCRTkGObI2BnO9Qd7zU3Ic+q/vB7wCCFJlmZro
+k9IfEZ2SiH9f3c8vCXK1yXgOyLlcEEhYS0uDGHKZ43CQb5EWcYom1I7xGhwzPzUB
+AKF7XxrV
+=2l+l
+-----END PGP SIGNATURE-----
