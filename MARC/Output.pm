@@ -53,6 +53,10 @@ sub _css {
 	$self->{'_tags_xml_raw_color'}->process_css;
 
 	$self->{'css'}->put(
+		['s', '#main'],
+		['d', 'padding-bottom', $FOOTER_HEIGHT],
+		['e'],
+
 		['s', 'footer'],
 		['d', 'text-align', 'center'],
 		['d', 'padding', '10px 0'],
@@ -62,10 +66,6 @@ sub _css {
 		['d', 'bottom', 0],
 		['d', 'width', '100%'],
 		['d', 'height', $FOOTER_HEIGHT],
-		['e'],
-
-		['s', '.container'],
-		['d', 'padding-bottom', $FOOTER_HEIGHT],
 		['e'],
 	);
 
@@ -294,13 +294,27 @@ sub _tags_middle {
 	$self->{'_tags_container'}->process(
 		sub {
 			$self->{'_tags_messages'}->process($messages_ar);
-
-			# Input: __ID__ (ČČNB) Transformation: __Transformation__ (link) Output: __Output__
-
-			$self->_view_data;
 		},
 	);
 
+	# Input: __ID__ (ČČNB) Transformation: __Transformation__ (link) Output: __Output__
+	# TODO
+
+	# Main.
+	$self->{'tags'}->put(
+		['b', 'div'],
+		['a', 'id', 'main'],
+	);
+	if ($self->{'_output_mode'} eq 'xml_raw') {
+		$self->{'_tags_xml_raw'}->process;
+	} elsif ($self->{'_output_mode'} eq 'xml_raw_color') {
+		$self->{'_tags_xml_raw_color'}->process;
+	}
+	$self->{'tags'}->put(
+		['e', 'div'],
+	);
+
+	# Footer.
 	$self->{'tags'}->put(
 		['b', 'footer'],
 		['b', 'a'],
@@ -316,18 +330,6 @@ sub _tags_middle {
 		['e', 'a'],
 		['e', 'footer'],
 	);
-
-	return;
-}
-
-sub _view_data {
-	my $self = shift;
-
-	if ($self->{'_output_mode'} eq 'xml_raw') {
-		$self->{'_tags_xml_raw'}->process;
-	} elsif ($self->{'_output_mode'} eq 'xml_raw_color') {
-		$self->{'_tags_xml_raw_color'}->process;
-	}
 
 	return;
 }
