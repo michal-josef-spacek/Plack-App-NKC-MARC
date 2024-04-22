@@ -20,7 +20,7 @@ use Unicode::UTF8 qw(decode_utf8);
 
 Readonly::Scalar our $FOOTER_HEIGHT => qw(40px);
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 sub _cleanup {
 	my ($self, $env) = @_;

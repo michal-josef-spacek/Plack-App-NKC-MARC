@@ -14,7 +14,7 @@ use Tags::HTML::Element::Option;
 
 Readonly::Array our @EXPORT_OK => qw(add_message detect_search select_data);
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 sub add_message {
 	my ($self, $env, $message_type, $message) = @_;
