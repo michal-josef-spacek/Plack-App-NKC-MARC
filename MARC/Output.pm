@@ -333,7 +333,7 @@ sub _tags_middle {
 	$self->{'tags'}->put(
 		['b', 'form'],
 		['a', 'method', 'get'],
-		['a', 'action', '/marc'],
+		['a', 'action', '/output'],
 		['a', 'id', 'input'],
 
 		['b', 'input'],

@@ -124,7 +124,7 @@ sub _prepare_app {
 			if ($columns_ar->[0] =~ m/^cnb\d+$/ms) {
 				$first = Data::HTML::Element::A->new(
 					'data' => [$columns_ar->[0]],
-					'url' => '/marc?search='.$columns_ar->[0],
+					'url' => '/output?search='.$columns_ar->[0],
 				),
 			} else {
 				$first = $columns_ar->[0];

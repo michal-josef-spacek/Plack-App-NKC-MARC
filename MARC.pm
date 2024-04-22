@@ -54,7 +54,7 @@ sub prepare_app {
 		'image_link' => $self->images->{'logo'},
 		'image_radius' => '15px',
 		'search_placeholder' => decode_utf8('ČČNB, ISBN, ISSN'),
-		'search_url' => '/marc',
+		'search_url' => '/output',
 		'tags_after' => [
 			['b', 'a'],
 			['a', 'href', '/list'],
@@ -78,7 +78,9 @@ sub prepare_app {
 	$self->{'_urlmap'} = Plack::App::URLMap->new;
 	$self->{'_urlmap'}->map('/' => $app_search);
 	$self->{'_urlmap'}->map('/list' => $app_list);
+	# XXX Remove, deprecated.
 	$self->{'_urlmap'}->map('/marc' => $app_output);
+	$self->{'_urlmap'}->map('/output' => $app_output);
 	if (defined $self->changes) {
 		$self->{'_urlmap'}->map('/changes' => $app_changes);
 	}
