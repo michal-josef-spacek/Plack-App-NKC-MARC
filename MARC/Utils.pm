@@ -12,7 +12,7 @@ use Readonly;
 
 Readonly::Array our @EXPORT_OK => qw(add_message detect_search);
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 sub add_message {
 	my ($self, $env, $message_type, $message) = @_;

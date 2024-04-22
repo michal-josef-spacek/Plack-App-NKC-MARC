@@ -58,4 +58,4 @@ resources:
   homepage: https://github.com/michal-josef-spacek/Plack-App-NKC-MARC
   license: http://opensource.org/licenses/bsd-license.php
   repository: git://github.com/michal-josef-spacek/Plack-App-NKC-MARC
-version: '0.01'
+version: '0.02'
