@@ -22,6 +22,8 @@ MARC/Utils.pm
 META.yml
 README
 share/data_cnb.csv
+t/Plack-App-NKC-MARC-List/01-use.t
+t/Plack-App-NKC-MARC-List/02-version.t
 t/Plack-App-NKC-MARC-Output/01-use.t
 t/Plack-App-NKC-MARC-Output/02-version.t
 t/Plack-App-NKC-MARC-Utils/01-use.t
@@ -31,6 +33,8 @@ t/Plack-App-NKC-MARC/01-use.t
 t/Plack-App-NKC-MARC/02-version.t
 t/Plack-App-NKP-MARC-Output/01-use.t
 t/Plack-App-NKP-MARC-Output/02-version.t
+xt/Plack-App-NKC-MARC-List/01-pod_coverage.t
+xt/Plack-App-NKC-MARC-List/02-pod.t
 xt/Plack-App-NKC-MARC-Output/01-pod_coverage.t
 xt/Plack-App-NKC-MARC-Output/02-pod.t
 xt/Plack-App-NKC-MARC-Utils/01-pod_coverage.t
