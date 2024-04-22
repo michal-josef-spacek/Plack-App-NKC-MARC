@@ -6,11 +6,13 @@ use warnings;
 
 use Business::ISBN;
 use Business::ISSN;
+use Data::HTML::Element::Select;
 use Data::Message::Simple;
 use Plack::Session;
 use Readonly;
+use Tags::HTML::Element::Option;
 
-Readonly::Array our @EXPORT_OK => qw(add_message detect_search);
+Readonly::Array our @EXPORT_OK => qw(add_message detect_search select_data);
 
 our $VERSION = 0.02;
 
@@ -75,6 +77,29 @@ sub detect_search {
 	}
 
 	return ($search_ccnb, $search_isbn, $search_issn);
+}
+
+sub select_data {
+	my ($self, $params_hr, $options_ar) = @_;
+
+	my $select_data = Data::HTML::Element::Select->new(
+		'data' => [sub {
+			my $self = shift;
+			foreach my $option (@{$options_ar}) {
+				my $tags_option = Tags::HTML::Element::Option->new(
+					'css' => $self->{'css'},
+					'tags' => $self->{'tags'},
+				);
+				$tags_option->init($option);
+				$tags_option->process_css;
+				$tags_option->process;
+			}
+		}],
+		'data_type' => 'cb',
+		%{$params_hr},
+	);
+
+	return $select_data;
 }
 
 1;

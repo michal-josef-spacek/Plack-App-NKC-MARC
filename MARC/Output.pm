@@ -4,18 +4,21 @@ use base qw(Plack::Component::Tags::HTML);
 use strict;
 use warnings;
 
+use Data::HTML::Element::Option;
+use Data::HTML::Element::Select;
 use Data::NKC::MARC::Menu;
 use Error::Pure qw(err);
 use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
-use Plack::App::NKC::MARC::Utils qw(add_message detect_search);
+use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
 use Plack::Request;
 use Plack::Session;
 use Plack::Util::Accessor qw(lang version zoom);
 use Readonly;
 use Scalar::Util qw(blessed);
 use Tags::HTML::Container;
+use Tags::HTML::Element::Select;
 use Tags::HTML::Messages;
 use Tags::HTML::NKC::MARC::Menu;
 use Tags::HTML::XML::Raw;
@@ -36,6 +39,7 @@ sub _cleanup {
 	$self->{'_tags_menu'}->cleanup;
 	$self->{'_tags_xml_raw'}->cleanup;
 	$self->{'_tags_xml_raw_color'}->cleanup;
+	$self->{'_tags_select_output'}->cleanup;
 
 	return;
 }
@@ -66,6 +70,14 @@ sub _css {
 		['d', 'bottom', 0],
 		['d', 'width', '100%'],
 		['d', 'height', $FOOTER_HEIGHT],
+		['e'],
+
+		['s', '#input'],
+		['d', 'margin-left', '1em'],
+		['e'],
+
+		['s', '#input select'],
+		['d', 'margin-bottom', '1em'],
 		['e'],
 	);
 
@@ -181,6 +193,7 @@ sub _prepare_app {
 	);
 	$self->{'_tags_xml_raw'} = Tags::HTML::XML::Raw->new(%p);
 	$self->{'_tags_xml_raw_color'} = Tags::HTML::XML::Raw::Color->new(%p);
+	$self->{'_tags_select_output'} = Tags::HTML::Element::Select->new(%p);
 
 	$self->{'_zoom_data'} = $self->zoom;
 	if (! defined $self->{'_zoom_data'}
@@ -229,6 +242,23 @@ sub _process_actions {
 			$self->script_js_src($self->{'_tags_xml_raw_color'}->script_js_src);
 		}
 	}
+
+	my $select_output = select_data($self, {
+		'name' => 'output_mode',
+		'onchange' => 'this.form.submit();',
+	}, [
+		Data::HTML::Element::Option->new(
+			'data' => ['XML'],
+			'value' => 'xml_raw',
+			$self->{'_output_mode'} eq 'xml_raw' ? ('selected' => 1) : (),
+		),
+		Data::HTML::Element::Option->new(
+			'data' => ['XML color'],
+			'value' => 'xml_raw_color',
+			$self->{'_output_mode'} eq 'xml_raw_color' ? ('selected' => 1) : (),
+		),
+	]);
+	$self->{'_tags_select_output'}->init($select_output);
 
 	return;
 }
@@ -299,6 +329,33 @@ sub _tags_middle {
 
 	# Input: __ID__ (ČČNB) Transformation: __Transformation__ (link) Output: __Output__
 	# TODO
+
+	$self->{'tags'}->put(
+		['b', 'form'],
+		['a', 'method', 'get'],
+		['a', 'action', '/marc'],
+		['a', 'id', 'input'],
+
+		['b', 'input'],
+		['a', 'type', 'hidden'],
+		['a', 'value', $self->{'_search'}],
+		['a', 'name', 'search'],
+		['e', 'input'],
+		['b', 'b'],
+		['d', 'Vstup:'],
+		['e', 'b'],
+		['d', ' Z39.50 NKP'],
+		['d', ', '],
+		['b', 'b'],
+		['d', decode_utf8('Výstup:')],
+		['e', 'b'],
+		['e', 'b'],
+		['d', ' MARC '],
+	);
+	$self->{'_tags_select_output'}->process;
+	$self->{'tags'}->put(
+		['e', 'form'],
+	);
 
 	# Main.
 	$self->{'tags'}->put(
