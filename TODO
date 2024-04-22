@@ -2,10 +2,12 @@ TODO
 ====
 2. Page to output with raw MARC record.
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
-4. Add list of interesting ccnb ids.
 5.
 
 Applied
 =======
 1. Search page with field for cnb number.
 OK [20240314] skim
+
+4. Add list of interesting ccnb ids.
+OK [20240422] skim
