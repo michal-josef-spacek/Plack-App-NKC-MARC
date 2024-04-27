@@ -12,6 +12,7 @@ use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
 use NKC::Transform::MARC2BIBFRAME;
+use NKC::Transform::MARC2RDA;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
 use Plack::Request;
 use Plack::Session;
@@ -178,6 +179,7 @@ sub _prepare_app {
 	$self->SUPER::_prepare_app;
 
 	$self->{'_transformation_marc2bibframe'} = NKC::Transform::MARC2BIBFRAME->new;
+	$self->{'_transformation_marc2rda'} = NKC::Transform::MARC2RDA->new;
 
 	my %p = (
 		'css' => $self->css,
@@ -247,6 +249,9 @@ sub _process_actions {
 		} elsif ($self->{'_transformation'} eq 'marc2bibframe') {
 			$output = $self->{'_transformation_marc2bibframe'}->transform($input);
 			$self->{'_output'} = 'BIBFRAME';
+		} elsif ($self->{'_transformation'} eq 'marc2rda') {
+			$output = $self->{'_transformation_marc2rda'}->transform($input);
+			$self->{'_output'} = 'RDA';
 		}
 
 		# Output.
@@ -273,6 +278,11 @@ sub _process_actions {
 			'data' => ['MARC2BIBFRAME'],
 			'value' => 'marc2bibframe',
 			$self->{'_transformation'} eq 'marc2bibframe' ? ('selected' => 1) : (),
+		),
+		Data::HTML::Element::Option->new(
+			'data' => ['MARC2RDA'],
+			'value' => 'marc2rda',
+			$self->{'_transformation'} eq 'marc2rda' ? ('selected' => 1) : (),
 		),
 	]);
 	$self->{'_tags_select_trans'}->init($select_trans);
