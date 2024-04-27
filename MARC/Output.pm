@@ -30,7 +30,7 @@ use ZOOM;
 Readonly::Array our @OUTPUT_MODES => qw(xml_raw xml_raw_color);
 Readonly::Scalar our $FOOTER_HEIGHT => qw(40px);
 
-our $VERSION = 0.04;
+our $VERSION = 0.05;
 
 sub _cleanup {
 	my ($self, $env) = @_;
