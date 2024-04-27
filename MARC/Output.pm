@@ -317,7 +317,7 @@ sub _process_form {
 		= detect_search($self->{'_search'});
 
 	# Transformation.
-	$self->{'_transformation'} = $req->parameters->{'transformation'};
+	$self->{'_transformation'} = $req->parameters->{'transformation'} || 'marc';
 
 	# View mode.
 	$self->{'_output_mode'} = $req->parameters->{'output_mode'};
