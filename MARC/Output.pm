@@ -11,6 +11,7 @@ use Error::Pure qw(err);
 use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
+use NKC::Transform::MARC2BIBFRAME;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
 use Plack::Request;
 use Plack::Session;
@@ -176,6 +177,8 @@ sub _prepare_app {
 	# Inherite defaults.
 	$self->SUPER::_prepare_app;
 
+	$self->{'_transformation_marc2bibframe'} = NKC::Transform::MARC2BIBFRAME->new;
+
 	my %p = (
 		'css' => $self->css,
 		'tags' => $self->tags,
@@ -194,6 +197,7 @@ sub _prepare_app {
 	$self->{'_tags_xml_raw'} = Tags::HTML::XML::Raw->new(%p);
 	$self->{'_tags_xml_raw_color'} = Tags::HTML::XML::Raw::Color->new(%p);
 	$self->{'_tags_select_output'} = Tags::HTML::Element::Select->new(%p);
+	$self->{'_tags_select_trans'} = Tags::HTML::Element::Select->new(%p);
 
 	$self->{'_zoom_data'} = $self->zoom;
 	if (! defined $self->{'_zoom_data'}
@@ -233,15 +237,45 @@ sub _process_actions {
 	$self->script_js_src([]);
 
 	if (defined $self->{'_marc'}) {
+		my $input = $self->{'_marc'}->as_xml;
+
+		# Transformation.
+		my $output;
+		if ($self->{'_transformation'} eq 'marc') {
+			$output = $input;
+			$self->{'_output'} = 'MARC';
+		} elsif ($self->{'_transformation'} eq 'marc2bibframe') {
+			$output = $self->{'_transformation_marc2bibframe'}->transform($input);
+			$self->{'_output'} = 'BIBFRAME';
+		}
+
+		# Output.
 		if ($self->{'_output_mode'} eq 'xml_raw') {
-			$self->{'_tags_xml_raw'}->init($self->{'_marc'}->as_xml);
+			$self->{'_tags_xml_raw'}->init($output);
 		} elsif ($self->{'_output_mode'} eq 'xml_raw_color') {
-			$self->{'_tags_xml_raw_color'}->init($self->{'_marc'}->as_xml);
+			$self->{'_tags_xml_raw_color'}->init($output);
 			$self->css_src($self->{'_tags_xml_raw_color'}->css_src);
 			$self->script_js($self->{'_tags_xml_raw_color'}->script_js);
 			$self->script_js_src($self->{'_tags_xml_raw_color'}->script_js_src);
 		}
 	}
+
+	my $select_trans = select_data($self, {
+		'name' => 'transformation',
+		'onchange' => 'this.form.submit();',
+	}, [
+		Data::HTML::Element::Option->new(
+			'data' => [decode_utf8('—')],
+			'value' => 'marc',
+			$self->{'_transformation'} eq 'marc' ? ('selected' => 1) : (),
+		),
+		Data::HTML::Element::Option->new(
+			'data' => ['MARC2BIBFRAME'],
+			'value' => 'marc2bibframe',
+			$self->{'_transformation'} eq 'marc2bibframe' ? ('selected' => 1) : (),
+		),
+	]);
+	$self->{'_tags_select_trans'}->init($select_trans);
 
 	my $select_output = select_data($self, {
 		'name' => 'output_mode',
@@ -281,6 +315,9 @@ sub _process_form {
 	$self->{'_search'} = $req->parameters->{'search'};
 	($self->{'_search_ccnb'}, $self->{'_search_isbn'}, $self->{'_search_issn'})
 		= detect_search($self->{'_search'});
+
+	# Transformation.
+	$self->{'_transformation'} = $req->parameters->{'transformation'};
 
 	# View mode.
 	$self->{'_output_mode'} = $req->parameters->{'output_mode'};
@@ -341,17 +378,29 @@ sub _tags_middle {
 		['a', 'value', $self->{'_search'}],
 		['a', 'name', 'search'],
 		['e', 'input'],
+
 		['b', 'b'],
 		['d', 'Vstup:'],
 		['e', 'b'],
-		['d', ' Z39.50 NKP'],
+		['d', ' MARC z Z39.50 NKP'],
 		['d', ', '],
+
+		['b', 'b'],
+		['d', 'Transformace:'],
+		['e', 'b'],
+		['d', ' '],
+	);
+	$self->{'_tags_select_trans'}->process;
+	$self->{'tags'}->put(
+		['d', ', '],
+
 		['b', 'b'],
 		['d', decode_utf8('Výstup:')],
 		['e', 'b'],
-		['d', ' MARC '],
+		['d', ' '.$self->{'_output'}.' '],
 	);
 	$self->{'_tags_select_output'}->process;
+
 	$self->{'tags'}->put(
 		['e', 'form'],
 	);

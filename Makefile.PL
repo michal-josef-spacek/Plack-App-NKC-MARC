@@ -32,6 +32,7 @@ requires 'IO::File' => 0;
 requires 'List::Util' => 1.33;
 requires 'MARC::File::XML' => 0;
 requires 'MARC::Record' => 0;
+requires 'NKC::Transform::MARC2BIBFRAME' => 0;
 requires 'Plack::App::CPAN::Changes' => 0;
 requires 'Plack::App::Search' => 0.05;
 requires 'Plack::App::URLMap' => 0;

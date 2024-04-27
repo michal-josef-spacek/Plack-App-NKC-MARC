@@ -36,6 +36,7 @@ requires:
   List::Util: 1.33
   MARC::File::XML: 0
   MARC::Record: 0
+  NKC::Transform::MARC2BIBFRAME: 0
   Plack::App::CPAN::Changes: 0
   Plack::App::Search: 0.05
   Plack::App::URLMap: 0
