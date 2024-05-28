@@ -26,6 +26,7 @@ requires 'Data::HTML::Element::Option' => 0;
 requires 'Data::HTML::Element::Select' => 0.14;
 requires 'Data::Message::Simple' => 0;
 requires 'Data::NKC::MARC::Menu' => 0;
+requires 'English' => 0;
 requires 'Error::Pure' => 0;
 requires 'File::Share' => 0;
 requires 'IO::File' => 0;

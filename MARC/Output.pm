@@ -7,6 +7,7 @@ use warnings;
 use Data::HTML::Element::Option;
 use Data::HTML::Element::Select;
 use Data::NKC::MARC::Menu;
+use English;
 use Error::Pure qw(err);
 use List::Util 1.33 qw(none);
 use MARC::File::XML;
@@ -116,11 +117,22 @@ sub _load_data {
 	my ($self, $env) = @_;
 
 	# Zoom connections.
-	$self->{'_zoom'} = ZOOM::Connection->new(
-		$self->{'_zoom_data'}->host,
-		$self->{'_zoom_data'}->port,
-		'databaseName' => $self->{'_zoom_data'}->db,
-	);
+	$self->{'_zoom'} = eval {
+		ZOOM::Connection->new(
+			$self->{'_zoom_data'}->host,
+			$self->{'_zoom_data'}->port,
+			'databaseName' => $self->{'_zoom_data'}->db,
+		);
+	};
+	if ($EVAL_ERROR) {
+		add_message(
+			$self,
+			$env,
+			'error',
+			decode_utf8('Nemůžu se připojit na \''.$self->{'_zoom_data'}->host.'\'.'),
+		);
+		return;
+	}
 	$self->{'_zoom'}->option('preferredRecordSyntax' => 'usmarc');
 
 	my $rs;
