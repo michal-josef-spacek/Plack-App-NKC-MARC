@@ -374,9 +374,16 @@ sub _tags_middle {
 
 	# Process messages.
 	my $messages_ar = [];
+	my $error = 0;
 	if (exists $env->{'psgix.session'}) {
 		my $session = Plack::Session->new($env);
 		$messages_ar = $session->get('messages');
+		foreach my $message (@{$messages_ar}) {
+			if ($message->type eq 'error') {
+				$error = 1;
+				last;
+			}
+		}
 		$session->set('messages', []);
 	}
 	$self->{'_tags_menu'}->process;
@@ -388,6 +395,10 @@ sub _tags_middle {
 
 	# Input: __ID__ (ČČNB) Transformation: __Transformation__ (link) Output: __Output__
 	# TODO
+
+	if ($error) {
+		return;
+	}
 
 	$self->{'tags'}->put(
 		['b', 'form'],
