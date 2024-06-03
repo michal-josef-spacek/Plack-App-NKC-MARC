@@ -2,7 +2,8 @@ TODO
 ====
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
 5. Add Export page.
-7.
+7. Add copyright years from Changes file.
+8.
 
 Arpplied
 =======
