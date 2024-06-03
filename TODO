@@ -2,7 +2,6 @@ TODO
 ====
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
 5. Add Export page.
-6. Rewrite to use of Tags::HTML::Footer.
 7.
 
 Arpplied
@@ -15,3 +14,6 @@ OK [20240422] skim
 
 2. Page to output with raw MARC record.
 OK [20240422] skim
+
+6. Rewrite to use of Tags::HTML::Footer.
+OK [20240603] skim

@@ -17,11 +17,12 @@ use NKC::Transform::MARC2RDA;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(lang version zoom);
+use Plack::Util::Accessor qw(footer lang version zoom);
 use Readonly;
 use Scalar::Util qw(blessed);
 use Tags::HTML::Container;
 use Tags::HTML::Element::Select;
+use Tags::HTML::Footer;
 use Tags::HTML::Messages;
 use Tags::HTML::NKC::MARC::Menu;
 use Tags::HTML::XML::Raw;
@@ -30,7 +31,6 @@ use Unicode::UTF8 qw(decode_utf8);
 use ZOOM;
 
 Readonly::Array our @OUTPUT_MODES => qw(xml_raw xml_raw_color);
-Readonly::Scalar our $FOOTER_HEIGHT => qw(40px);
 
 our $VERSION = 0.09;
 
@@ -38,6 +38,7 @@ sub _cleanup {
 	my ($self, $env) = @_;
 
 	$self->{'_tags_container'}->cleanup;
+	$self->{'_tags_footer'}->cleanup;
 	$self->{'_tags_messages'}->cleanup;
 	$self->{'_tags_menu'}->cleanup;
 	$self->{'_tags_xml_raw'}->cleanup;
@@ -51,6 +52,7 @@ sub _css {
 	my ($self, $env) = @_;
 
 	$self->{'_tags_container'}->process_css;
+	$self->{'_tags_footer'}->process_css;
 	$self->{'_tags_messages'}->process_css({
 		'error' => 'red',
 		'info' => 'green',
@@ -60,21 +62,6 @@ sub _css {
 	$self->{'_tags_xml_raw_color'}->process_css;
 
 	$self->{'css'}->put(
-		['s', '#main'],
-		['d', 'padding-bottom', $FOOTER_HEIGHT],
-		['e'],
-
-		['s', 'footer'],
-		['d', 'text-align', 'center'],
-		['d', 'padding', '10px 0'],
-		['d', 'background-color', '#f3f3f3'],
-		['d', 'color', '#333'],
-		['d', 'position', 'fixed'],
-		['d', 'bottom', 0],
-		['d', 'width', '100%'],
-		['d', 'height', $FOOTER_HEIGHT],
-		['e'],
-
 		['s', '#input'],
 		['d', 'margin-left', '1em'],
 		['e'],
@@ -202,6 +189,7 @@ sub _prepare_app {
 		'padding' => '0.5em',
 		'vert_align' => 'top',
 	);
+	$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
 		'flag_no_messages' => 0,
 	);
@@ -315,6 +303,8 @@ sub _process_actions {
 		),
 	]);
 	$self->{'_tags_select_output'}->init($select_output);
+
+	$self->{'_tags_footer'}->init($self->footer);
 
 	return;
 }
@@ -453,21 +443,7 @@ sub _tags_middle {
 	);
 
 	# Footer.
-	$self->{'tags'}->put(
-		['b', 'footer'],
-		['b', 'a'],
-		['a', 'href', '/changes'],
-		['d', 'Verze: '.(defined $self->version ? $self->version : $VERSION)],
-		['e', 'a'],
-		['d', ',&nbsp;'],
-		# XXX Automatic year.
-		['d', decode_utf8('© 2024 ')],
-		['b', 'a'],
-		['a', 'href', 'https://skim.cz'],
-		['d', decode_utf8('Michal Josef Špaček')],
-		['e', 'a'],
-		['e', 'footer'],
-	);
+	$self->{'_tags_footer'}->process;
 
 	return;
 }

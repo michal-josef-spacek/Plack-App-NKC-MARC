@@ -28,6 +28,7 @@ requires:
   Data::HTML::Element::A: 0
   Data::HTML::Element::Option: 0
   Data::HTML::Element::Select: 0.14
+  Data::HTML::Footer: 0.02
   Data::Message::Simple: 0
   Data::NKC::MARC::Menu: 0
   English: 0
@@ -51,6 +52,7 @@ requires:
   Tags::HTML::Container: 0.07
   Tags::HTML::Element::Option: 0
   Tags::HTML::Element::Select: 0.12
+  Tags::HTML::Footer: 0.01
   Tags::HTML::Messages: 0
   Tags::HTML::NKC::MARC::Menu: 0
   Tags::HTML::Table::View: 0.06

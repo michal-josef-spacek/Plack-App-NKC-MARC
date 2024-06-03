@@ -4,6 +4,7 @@ use base qw(Plack::Component);
 use strict;
 use warnings;
 
+use Data::HTML::Footer 0.02;
 use Plack::App::CPAN::Changes;
 use Plack::App::NKC::MARC::List;
 use Plack::App::NKC::MARC::Output;
@@ -38,8 +39,22 @@ sub prepare_app {
 		$version = ($self->changes->releases)[-1]->version;
 	}
 
+	my $changes_url = '/changes';
+	my $footer = Data::HTML::Footer->new(
+		'author' => decode_utf8('Michal Josef Špaček'),
+		'author_url' => 'https://skim.cz',
+		'copyright_years' => '2024',
+		'height' => '40px',
+		defined $version ? (
+			'version' => $version,
+		) : (),
+		defined $self->changes ? (
+			'version_url' => $changes_url,
+		) : (),
+	);
 	my %common_params = (
 		%p,
+		'footer' => $footer,
 		defined $version ? (
 			'version' => $version,
 		) : (),
@@ -82,7 +97,7 @@ sub prepare_app {
 	$self->{'_urlmap'}->map('/marc' => $app_output);
 	$self->{'_urlmap'}->map('/output' => $app_output);
 	if (defined $self->changes) {
-		$self->{'_urlmap'}->map('/changes' => $app_changes);
+		$self->{'_urlmap'}->map($changes_url => $app_changes);
 	}
 
 	return;
