@@ -2,9 +2,10 @@ TODO
 ====
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
 5. Add Export page.
-6.
+6. Rewrite to use of Tags::HTML::Footer.
+7.
 
-Applied
+Arpplied
 =======
 1. Search page with field for cnb number.
 OK [20240314] skim
