@@ -12,6 +12,7 @@ use Error::Pure qw(err);
 use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
+use NKC::Transform::BIBFRAME2MARC;
 use NKC::Transform::MARC2BIBFRAME;
 use NKC::Transform::MARC2RDA;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
@@ -177,6 +178,7 @@ sub _prepare_app {
 	# Inherite defaults.
 	$self->SUPER::_prepare_app;
 
+	$self->{'_transformation_bibframe2marc'} = NKC::Transform::BIBFRAME2MARC->new;
 	$self->{'_transformation_marc2bibframe'} = NKC::Transform::MARC2BIBFRAME->new;
 	$self->{'_transformation_marc2rda'} = NKC::Transform::MARC2RDA->new;
 
@@ -249,6 +251,10 @@ sub _process_actions {
 		} elsif ($self->{'_transformation'} eq 'marc2bibframe') {
 			$output = $self->{'_transformation_marc2bibframe'}->transform($input);
 			$self->{'_output'} = 'BIBFRAME';
+		} elsif ($self->{'_transformation'} eq 'marc2bibframe2marc') {
+			$output = $self->{'_transformation_marc2bibframe'}->transform($input);
+			$output = $self->{'_transformation_bibframe2marc'}->transform($output);
+			$self->{'_output'} = 'MARC';
 		} elsif ($self->{'_transformation'} eq 'marc2rda') {
 			$output = $self->{'_transformation_marc2rda'}->transform($input);
 			$self->{'_output'} = 'RDA';
@@ -278,6 +284,11 @@ sub _process_actions {
 			'data' => ['MARC2BIBFRAME'],
 			'value' => 'marc2bibframe',
 			$self->{'_transformation'} eq 'marc2bibframe' ? ('selected' => 1) : (),
+		),
+		Data::HTML::Element::Option->new(
+			'data' => ['MARC2BIBFRAME2MARC'],
+			'value' => 'marc2bibframe2marc',
+			$self->{'_transformation'} eq 'marc2bibframe2marc' ? ('selected' => 1) : (),
 		),
 		Data::HTML::Element::Option->new(
 			'data' => ['MARC2RDA'],

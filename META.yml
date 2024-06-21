@@ -38,6 +38,7 @@ requires:
   List::Util: 1.33
   MARC::File::XML: 0
   MARC::Record: 0
+  NKC::Transform::BIBFRAME2MARC: 0
   NKC::Transform::MARC2BIBFRAME: 0
   NKC::Transform::MARC2RDA: 0
   Plack::App::CPAN::Changes: 0

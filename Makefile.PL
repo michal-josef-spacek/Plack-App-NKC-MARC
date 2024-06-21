@@ -34,6 +34,7 @@ requires 'IO::File' => 0;
 requires 'List::Util' => 1.33;
 requires 'MARC::File::XML' => 0;
 requires 'MARC::Record' => 0;
+requires 'NKC::Transform::BIBFRAME2MARC' => 0;
 requires 'NKC::Transform::MARC2BIBFRAME' => 0;
 requires 'NKC::Transform::MARC2RDA' => 0;
 requires 'Plack::App::CPAN::Changes' => 0;
