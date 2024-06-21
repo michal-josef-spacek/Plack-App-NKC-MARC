@@ -1,4 +1,4 @@
-0.09
+0.09 2024-06-21T20:04:12+02:00
  - Add transformation MARC2BIBFRAME2MARC.
  - Rewrite to use of Tags::HTML::Footer component.
 
