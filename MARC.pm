@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use Data::HTML::Footer 0.02;
-use Plack::App::CPAN::Changes;
+use Plack::App::CPAN::Changes 0.03;
 use Plack::App::NKC::MARC::List;
 use Plack::App::NKC::MARC::Output;
 use Plack::App::Search 0.04;
