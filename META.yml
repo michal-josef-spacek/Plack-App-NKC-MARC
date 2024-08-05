@@ -53,7 +53,7 @@ requires:
   Tags::HTML::Container: 0.07
   Tags::HTML::Element::Option: 0
   Tags::HTML::Element::Select: 0.12
-  Tags::HTML::Footer: 0.01
+  Tags::HTML::Footer: 0.03
   Tags::HTML::Messages: 0
   Tags::HTML::NKC::MARC::Menu: 0
   Tags::HTML::Table::View: 0.06

@@ -23,7 +23,7 @@ use Readonly;
 use Scalar::Util qw(blessed);
 use Tags::HTML::Container;
 use Tags::HTML::Element::Select;
-use Tags::HTML::Footer;
+use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::NKC::MARC::Menu;
 use Tags::HTML::XML::Raw;

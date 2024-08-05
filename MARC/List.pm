@@ -11,7 +11,7 @@ use Plack::Request;
 use Plack::Session;
 use Plack::Util::Accessor qw(footer lang version);
 use Tags::HTML::Container;
-use Tags::HTML::Footer;
+use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::NKC::MARC::Menu;
 use Tags::HTML::Table::View;
