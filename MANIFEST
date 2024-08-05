@@ -25,13 +25,16 @@ share/data_cnb.csv
 SIGNATURE
 t/Plack-App-NKC-MARC-List/01-use.t
 t/Plack-App-NKC-MARC-List/02-version.t
+t/Plack-App-NKC-MARC-List/03-new.t
 t/Plack-App-NKC-MARC-Output/01-use.t
 t/Plack-App-NKC-MARC-Output/02-version.t
+t/Plack-App-NKC-MARC-Output/03-new.t
 t/Plack-App-NKC-MARC-Utils/01-use.t
 t/Plack-App-NKC-MARC-Utils/02-version.t
 t/Plack-App-NKC-MARC-Utils/03-detect_search.t
 t/Plack-App-NKC-MARC/01-use.t
 t/Plack-App-NKC-MARC/02-version.t
+t/Plack-App-NKC-MARC/03-new.t
 xt/Plack-App-NKC-MARC-List/01-pod_coverage.t
 xt/Plack-App-NKC-MARC-List/02-pod.t
 xt/Plack-App-NKC-MARC-Output/01-pod_coverage.t
