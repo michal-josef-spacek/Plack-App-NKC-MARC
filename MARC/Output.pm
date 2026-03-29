@@ -257,6 +257,14 @@ sub _process_actions {
 			$self->{'_output'} = 'MARC';
 		} elsif ($self->{'_transformation'} eq 'marc2rda') {
 			$output = $self->{'_transformation_marc2rda'}->transform($input);
+			foreach my $message ($self->{'_transformation_marc2rda'}->messages) {
+				add_message(
+					$self,
+					$env,
+					'info',
+					$message,
+				);
+			}
 			$self->{'_output'} = 'RDA';
 		}
 
