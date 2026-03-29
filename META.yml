@@ -40,7 +40,7 @@ requires:
   MARC::Record: 0
   NKC::Transform::BIBFRAME2MARC: 0
   NKC::Transform::MARC2BIBFRAME: 0
-  NKC::Transform::MARC2RDA: 0
+  NKC::Transform::MARC2RDA: 0.03
   Plack::App::CPAN::Changes: 0.03
   Plack::App::Search: 0.05
   Plack::App::URLMap: 0
