@@ -4,7 +4,9 @@ TODO
 5. Add Export page.
 7. Add copyright years from Changes file.
 8. Add doc.
-9.
+9. Check errors with transformation or load (NKC::Transform::MARC2RDA has issues 
+   with loading of library)
+10.
 
 Arpplied
 =======
