@@ -2,7 +2,6 @@ TODO
 ====
 3. Add NKC::MARC::Search page, which inherits Plack::App::Search.
 5. Add Export page.
-7. Add copyright years from Changes file.
 8. Add doc.
 9. Check errors with transformation or load (NKC::Transform::MARC2RDA has issues 
    with loading of library)
@@ -21,3 +20,6 @@ OK [20240422] skim
 
 6. Rewrite to use of Tags::HTML::Footer.
 OK [20240603] skim
+
+7. Add copyright years from Changes file.
+OK [20260401] skim

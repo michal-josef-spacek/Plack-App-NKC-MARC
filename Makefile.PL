@@ -21,6 +21,7 @@ readme_from 'MARC.pm';
 recursive_author_tests('xt');
 requires 'Business::ISBN' => 0;
 requires 'Business::ISSN' => 0;
+requires 'CPAN::Changes::Utils' => 0;
 requires 'Data::HTML::Element::A' => 0;
 requires 'Data::HTML::Element::Option' => 0;
 requires 'Data::HTML::Element::Select' => 0.14;

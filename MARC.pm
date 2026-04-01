@@ -4,6 +4,7 @@ use base qw(Plack::Component);
 use strict;
 use warnings;
 
+use CPAN::Changes::Utils qw(construct_copyright_years);
 use Data::HTML::Footer 0.02;
 use Plack::App::CPAN::Changes 0.03;
 use Plack::App::NKC::MARC::List;
@@ -34,16 +35,19 @@ sub prepare_app {
 		'tags' => $self->tags,
 	);
 
-	my $version;
+	my ($version, $copyright_years);
 	if (defined $self->changes) {
 		$version = ($self->changes->releases)[-1]->version;
+		$copyright_years = construct_copyright_years($self->changes);
 	}
 
 	my $changes_url = '/changes';
 	my $footer = Data::HTML::Footer->new(
 		'author' => decode_utf8('Michal Josef Špaček'),
 		'author_url' => 'https://skim.cz',
-		'copyright_years' => '2024',
+		defined $copyright_years ? (
+			'copyright_years' => $copyright_years,
+		) : (),
 		'height' => '40px',
 		defined $version ? (
 			'version' => $version,

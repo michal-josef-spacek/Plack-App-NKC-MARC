@@ -25,6 +25,7 @@ no_index:
 requires:
   Business::ISBN: 0
   Business::ISSN: 0
+  CPAN::Changes::Utils: 0
   Data::HTML::Element::A: 0
   Data::HTML::Element::Option: 0
   Data::HTML::Element::Select: 0.14
