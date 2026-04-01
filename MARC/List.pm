@@ -18,7 +18,7 @@ use Tags::HTML::Table::View;
 use Text::CSV_XS;
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.11;
+our $VERSION = 0.12;
 
 sub _cleanup {
 	my ($self, $env) = @_;

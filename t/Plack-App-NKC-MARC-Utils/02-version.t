@@ -6,4 +6,4 @@ use Test::More 'tests' => 2;
 use Test::NoWarnings;
 
 # Test.
-is($Plack::App::NKC::MARC::Utils::VERSION, 0.11, 'Version.');
+is($Plack::App::NKC::MARC::Utils::VERSION, 0.12, 'Version.');
