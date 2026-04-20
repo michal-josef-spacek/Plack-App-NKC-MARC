@@ -33,7 +33,7 @@ use ZOOM;
 
 Readonly::Array our @OUTPUT_MODES => qw(xml_raw xml_raw_color);
 
-our $VERSION = 0.12;
+our $VERSION = 0.13;
 
 sub _cleanup {
 	my ($self, $env) = @_;

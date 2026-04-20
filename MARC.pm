@@ -15,7 +15,7 @@ use Plack::Session;
 use Plack::Util::Accessor qw(changes css images lang tags zoom);
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.12;
+our $VERSION = 0.13;
 
 sub call {
 	my ($self, $env) = @_;
