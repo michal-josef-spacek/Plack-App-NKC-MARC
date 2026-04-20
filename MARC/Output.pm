@@ -13,7 +13,7 @@ use List::Util 1.33 qw(none);
 use MARC::File::XML;
 use MARC::Record;
 use NKC::Transform::BIBFRAME2MARC;
-use NKC::Transform::MARC2BIBFRAME;
+use NKC::Transform::MARC2BIBFRAME 0.06;
 use NKC::Transform::MARC2RDA 0.03;
 use Plack::App::NKC::MARC::Utils qw(add_message detect_search select_data);
 use Plack::Request;
@@ -179,7 +179,9 @@ sub _prepare_app {
 	$self->SUPER::_prepare_app;
 
 	$self->{'_transformation_bibframe2marc'} = NKC::Transform::BIBFRAME2MARC->new;
-	$self->{'_transformation_marc2bibframe'} = NKC::Transform::MARC2BIBFRAME->new;
+	$self->{'_transformation_marc2bibframe'} = NKC::Transform::MARC2BIBFRAME->new(
+		'version' => '3.0.0CZ',
+	);
 	$self->{'_transformation_marc2rda'} = NKC::Transform::MARC2RDA->new;
 
 	my %p = (

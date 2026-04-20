@@ -1,4 +1,5 @@
 0.12
+ - Change MARC2BIBFRAME transformation to 3.0.0CZ version.
 
 0.11 2026-04-01T16:38:31+02:00
  - Use copyright years from Changes file.
